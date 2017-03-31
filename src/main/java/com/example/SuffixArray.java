@@ -7,7 +7,7 @@ class SuffixArray
     
     /*
      * Create the LCP array from the suffix array
-     * @param s the input array populated from 0..N-1, with available pos N
+     * @param s the input.txt array populated from 0..N-1, with available pos N
      * @param sa the already-computed suffix array 0..N-1
      * @param LCP the resulting LCP array 0..N-1
      */
@@ -37,7 +37,7 @@ class SuffixArray
     
     /*
      * Fill in the suffix array information for String str
-     * @param str the input String
+     * @param str the input.txt String
      * @param sa existing array to place the suffix array
      */
     public static void createSuffixArray( String str, int [ ] sa, int [ ] LCP )
@@ -325,7 +325,7 @@ class SuffixArray
 
     /*
      * Fill in the suffix array and LCP information for String str
-     * @param str the input String
+     * @param str the input.txt String
      * @param SA existing array to place the suffix array
      * @param LCP existing array to place the LCP information
      * Note: Starting in Java 7, this will use quadratic space.
