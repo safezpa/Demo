@@ -25,7 +25,7 @@ import java.lang.reflect.Method;
 public class MethodAreaOutOfMemory {
 
 
-    public static void main(String[] args) {
+    public StreamAPI void main(String[] args) {
 
         while(true){
 

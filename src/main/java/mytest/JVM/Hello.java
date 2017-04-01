@@ -19,7 +19,7 @@ public class Hello {
 */
 
     private static int count=0;
-/*    public static void recursion(){
+/*    public StreamAPI void recursion(){
         count++;
         recursion();
     }*/
@@ -62,7 +62,7 @@ public class HelloWorld extends java.lang.Object{
    1:   invokespecial   #1; //Method java/lang/Object."<init>":()V
    4:   return
 
-    public static void main(java.lang.String[]);
+    public StreamAPI void main(java.lang.String[]);
     Code:
             0:   getstatic   #2; //Field java/lang/System.out:Ljava/io/PrintStream;
    3:   ldc #3; //String Hello World

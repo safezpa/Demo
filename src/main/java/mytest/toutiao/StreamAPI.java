@@ -92,7 +92,8 @@ public class StreamAPI {
         while (it.hasNext()) {
             Map.Entry<Integer, List<String>> word = (Map.Entry) it.next();
 
-            System.out.println(word.getKey() + " = \t" + word.getValue().size());
+            System.out.printf("%20s",word.getKey() + " = ");
+            System.out.print(word.getValue().size()+ "\n");
         }
 
         System.out.println();

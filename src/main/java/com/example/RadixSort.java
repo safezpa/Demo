@@ -15,7 +15,7 @@ public class RadixSort
      * Assume all have same length
      *//*
 
-    public static void radixSortA( String [ ] arr, int stringLen )
+    public StreamAPI void radixSortA( String [ ] arr, int stringLen )
     {
         final int BUCKETS = 256;
         
@@ -47,7 +47,7 @@ public class RadixSort
      * Assume all have same length
      *//*
 
-    public static void countingRadixSort( String [ ] arr, int stringLen )
+    public StreamAPI void countingRadixSort( String [ ] arr, int stringLen )
     {
         final int BUCKETS = 256;
         
@@ -89,7 +89,7 @@ public class RadixSort
      * Assume all have length bounded by maxLen
      *//*
 
-    public static void radixSort( String [ ] arr, int maxLen )
+    public StreamAPI void radixSort( String [ ] arr, int maxLen )
     {
         final int BUCKETS = 256;
         
@@ -129,7 +129,7 @@ public class RadixSort
         }
     }
 
-    public static void main( String [ ] args )
+    public StreamAPI void main( String [ ] args )
     {
         List<String> lst = new ArrayList<>( );
         Random r = new Random( );

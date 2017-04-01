@@ -2,7 +2,7 @@ package com.example;
 
 /**
  * A class that contains several sorting routines,
- * implemented as static methods.
+ * implemented as StreamAPI methods.
  * Arrays are rearranged with smallest item first,
  * using compareTo.
  * @author Mark Allen Weiss

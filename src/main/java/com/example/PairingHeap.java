@@ -164,7 +164,7 @@ public class PairingHeap<AnyType extends Comparable<? super AnyType>>
     }
     
     /**
-     * Private static class for use with PairingHeap.
+     * Private StreamAPI class for use with PairingHeap.
      */
     private static class PairNode<AnyType> implements Position<AnyType> 
     {

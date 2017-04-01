@@ -33,7 +33,7 @@ public class WordCount {
         }
     }
 
-    public static void main(String[] args) { // 用HashMap存放<单词:词频>这样一个映射关系
+    public StreamAPI void main(String[] args) { // 用HashMap存放<单词:词频>这样一个映射关系
         HashMap<String, Integer> hashMap = new HashMap<String, Integer>();
         try {
             // 读取要处理的文件

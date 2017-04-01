@@ -1,4 +1,4 @@
-package mytest.JVM;
+package mytest.Colloction;
 
 /**
  * Created by safe on 2017-04-01.
