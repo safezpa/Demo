@@ -1,4 +1,4 @@
-package mytest.toutiao;
+package mytest.NLP;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
