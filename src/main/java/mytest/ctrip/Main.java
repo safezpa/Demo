@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 /**
  * Created by safe on 2017-04-11.
- *
+ * <p>
  * 贪心策略：要使乘积做大，尽可能地将指定的n(n>4)拆分成从2开始的连续的自然数的和，
  * 如果最后有剩余的数，将这个剩余的数在优先考虑后面项的情况下平均分给前面的各项。
  * 例：
@@ -16,9 +16,9 @@ import java.util.Scanner;
  * 所以将其平均分给前面的项，优先考虑后面的项，
  * 即前面的4项各分到1，第5项，分到2，
  * 最后是26=3+4+5+6+8，所以最大的乘积为3*4*5*6*8=2880.
- *
- *
- *
+ * <p>
+ * <p>
+ * <p>
  * 基本算法描述如下：
  * 1． 拆分过程
  * 拆分的数a先取2;
@@ -28,14 +28,13 @@ import java.util.Scanner;
  * a增加1；
  * n减少a;
  * end;
- *
+ * <p>
  * 如果n>0，那么将n从最后一项开始平均分给各项；
  * 如果n还大于0，再从最后一项开始分一次；
- *
- *
- *
- *
- *
+ */
+
+/**
+ * Created by safe on 2017-04-11.
  */
 public class Main {
     public static void main(String[] args)   {
@@ -69,8 +68,11 @@ public class Main {
             if (left==0) flag=false;
         }
 
-        for(int i=0;i<=len-1;i++)
+        for(int i=0;i<=len-1;i++){
+            System.out.println(a[i]);
             out=out*a[i];
+        }
+
         System.out.println(out);
 
     }

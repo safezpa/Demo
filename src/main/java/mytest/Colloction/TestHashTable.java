@@ -15,8 +15,16 @@ public class TestHashTable {
         ht.put(2,0);
         System.out.println(ht);
         System.out.println(0x7FFFFFFF);
+int m=0;
+        for (int i = 1; i <= 10; i++)
+        {
+            for (int j = i; j >=0; j--)
+            {
+                j--;
+                m++;
+            }
+        }
 
-
-
+        System.out.println(m);
     }
 }
