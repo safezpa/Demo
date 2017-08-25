@@ -1,4 +1,4 @@
-/* UDPClient.java from Kurose-Ross  
+package cs_network;/* UDPClient.java from Kurose-Ross
    with minor revisions by Amer 8/2002 (cis.udel.edu) */
 
 import java.io.*;

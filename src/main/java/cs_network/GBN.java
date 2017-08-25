@@ -1,4 +1,4 @@
-/*
+package cs_network;/*
  *    This Go Back N Applet was designed to be used in conjunction with
  *    "Computer Networking: A Top Down Approach"
  *    by James Kurose & Keith Ross.

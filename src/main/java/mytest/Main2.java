@@ -1,4 +1,4 @@
-package mytest.lianjia;
+package mytest;
 
 import java.util.Scanner;
 

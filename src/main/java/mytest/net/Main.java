@@ -1,4 +1,4 @@
-package mytest.netease;
+package mytest.net;
 
 import java.util.Scanner;
 
