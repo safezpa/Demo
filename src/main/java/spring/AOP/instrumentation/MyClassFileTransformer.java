@@ -5,9 +5,15 @@ import javassist.*;
 import java.io.IOException;
 import java.lang.instrument.ClassFileTransformer;
 import java.lang.instrument.IllegalClassFormatException;
+import java.lang.instrument.Instrumentation;
 import java.security.ProtectionDomain;
 
 public class MyClassFileTransformer implements ClassFileTransformer {
+
+    public static void premain(String options, Instrumentation ins) {
+        //注册我自己的字节码转换器
+        ins.addTransformer(new MyClassFileTransformer());
+    }
 
     /**
      * 字节码加载到虚拟机前会进入这个方法

@@ -10,6 +10,7 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.env.Environment;
+import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
 
@@ -18,6 +19,7 @@ import java.util.Arrays;
  *
  * By default, it only runs with the "dev" profile.
  */
+@Component
 @Aspect
 public class LoggingAspect {
 
@@ -32,7 +34,7 @@ public class LoggingAspect {
     /**
      * Pointcut that matches all repositories, services and Web REST endpoints.
      */
-    @Pointcut("within(cn.iouoi.service..*) || within(cn.iouoi.web.rest..*)")
+    @Pointcut("within(spring.AOP.AspectJ_AOP.*) ")
     public void loggingPointcut() {
         // Method is empty as this is just a Pointcut, the implementations are in the advices.
     }
@@ -45,6 +47,7 @@ public class LoggingAspect {
      */
     @AfterThrowing(pointcut = "loggingPointcut()", throwing = "e")
     public void logAfterThrowing(JoinPoint joinPoint, Throwable e) {
+
         if (env.acceptsProfiles(SPRING_PROFILE_DEVELOPMENT)) {
             log.error("Exception in {}.{}() with cause = \'{}\' and exception = \'{}\'", joinPoint.getSignature().getDeclaringTypeName(),
                     joinPoint.getSignature().getName(), e.getCause() != null? e.getCause() : "NULL", e.getMessage(), e);
@@ -62,17 +65,30 @@ public class LoggingAspect {
      * @return result
      * @throws Throwable throws IllegalArgumentException
      */
+
     @Around("loggingPointcut()")
     public Object logAround(ProceedingJoinPoint joinPoint) throws Throwable {
-        if (log.isDebugEnabled()) {
+        //log.isDebugEnabled()
+        if (true) {
+            System.out.println();
+            System.out.printf("Enter: "+ joinPoint.getSignature()
+                            .getDeclaringTypeName()+
+                    joinPoint.getSignature().getName()+" with argument[s] = "+ Arrays.toString
+                    (joinPoint.getArgs()));
             log.debug("Enter: {}.{}() with argument[s] = {}", joinPoint.getSignature().getDeclaringTypeName(),
                     joinPoint.getSignature().getName(), Arrays.toString(joinPoint.getArgs()));
         }
         try {
             Object result = joinPoint.proceed();
-            if (log.isDebugEnabled()) {
+            //log.isDebugEnabled()
+            if (true) {
+                System.out.println();
+                System.out.printf("Exit: "+ joinPoint.getSignature()
+                                .getDeclaringTypeName()+
+                        joinPoint.getSignature().getName()+" with result = "+ result);
                 log.debug("Exit: {}.{}() with result = {}", joinPoint.getSignature().getDeclaringTypeName(),
                         joinPoint.getSignature().getName(), result);
+                System.out.println();
             }
             return result;
         } catch (IllegalArgumentException e) {
