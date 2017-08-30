@@ -52,7 +52,7 @@ public class AsyncTimeClientHandler implements CompletionHandler<Void, AsyncTime
         //创建请求消息体，对其进行编码，然后复制到发送缓冲区writeBuffer中，
         //调用Asynchronous SocketChannel的write方法进行异步写。
         //与服务端类似，我们可以实现CompletionHandler ＜Integer, ByteBuffer＞接口用于写操作完成后的回调。
-        byte[] req = "QUERY TIME ORDER".getBytes();
+        byte[] req = "QUERY TIME ORDER NOW".getBytes();
         ByteBuffer writeBuffer = ByteBuffer.allocate(req.length);
         writeBuffer.put(req);
         writeBuffer.flip();

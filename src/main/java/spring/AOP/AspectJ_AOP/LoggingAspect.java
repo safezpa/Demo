@@ -32,7 +32,7 @@ public class LoggingAspect {
     /**
      * Pointcut that matches all repositories, services and Web REST endpoints.
      */
-    @Pointcut("within(cn.iouoi.repository..*) || within(cn.iouoi.service..*) || within(cn.iouoi.web.rest..*)")
+    @Pointcut("within(cn.iouoi.service..*) || within(cn.iouoi.web.rest..*)")
     public void loggingPointcut() {
         // Method is empty as this is just a Pointcut, the implementations are in the advices.
     }

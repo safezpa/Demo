@@ -10,6 +10,12 @@ import java.nio.channels.SocketChannel;
 import java.nio.charset.Charset;
 import java.util.Iterator;
 
+
+//一个多路复用器Selector可以同时轮询多个Channel，
+// 由于JDK使用了epoll()代替传统的select实现，
+// 所以它并没有最大连接句柄1024/2048的限制。
+// 这也就意味着只需要一个线程负责Selector的轮询，
+// 就可以接入成千上万的客户端，这确实是个非常巨大的进步。
 public class NIOServer {
     public static void main(String[] args) throws IOException {
         //创建ServerSocketChannel，监听8080端口
