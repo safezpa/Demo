@@ -1,5 +1,6 @@
-package spring.AOP.dpoxy;
-public class Business implements IBusiness2 ,IBusiness {
+package spring.AOP;
+
+public class Business implements IBusiness2,IBusiness {
 
     @Override
     public boolean doSomeThing() {
