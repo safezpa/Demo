@@ -22,6 +22,7 @@ public class Client {
     }
     @SuppressWarnings("resource")
     public static void main(String[] args) throws Exception{
+
         Client.start();
         System.out.println("请输入请求消息：");
         Scanner scanner = new Scanner(System.in);

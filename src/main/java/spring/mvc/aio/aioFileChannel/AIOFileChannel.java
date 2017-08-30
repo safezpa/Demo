@@ -8,9 +8,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
-import java.util.concurrent.Future;
 
 public class AIOFileChannel {
+    static Thread current;
     public static void readingData() throws IOException {
         //Reading Data
 
@@ -18,10 +18,11 @@ public class AIOFileChannel {
         AsynchronousFileChannel fileChannel=AsynchronousFileChannel.open(path,
                 StandardOpenOption
                 .READ);
-        ByteBuffer buffer=ByteBuffer.allocate(10);
+        ByteBuffer buffer=ByteBuffer.allocate(1024);
         long position=0;
-
         //1.Reading Data Via a Future
+/*
+        System.out.println("1.Reading Data Via a Future");
         Future<Integer> operation=fileChannel.read(buffer,position);
         //blocking
         while (!operation.isDone());
@@ -29,21 +30,23 @@ public class AIOFileChannel {
         buffer.flip();
         byte[] data=new byte[buffer.limit()];
         buffer.get(data);
-        System.out.println("1.Reading Data Via a Future");
         System.out.println(new String(data));
         buffer.clear();
+*/
+
         //2.Reading data via a CompletionHandler
-        fileChannel.read(buffer, position, buffer,new CompletionHandler<Integer,ByteBuffer>() {
+         current=Thread.currentThread();
+       fileChannel.read(buffer, position, buffer,new CompletionHandler<Integer,ByteBuffer>() {
             @Override
             public void completed(Integer result, ByteBuffer attachment) {
                 System.out.println("result = " + result);
-
                 attachment.flip();
                 byte[] data=new byte[attachment.limit()];
                 attachment.get(data);
                 System.out.println("2.Reading data via a CompletionHandler");
                 System.out.println(new String(data));
                 attachment.clear();
+                current.interrupt();
             }
 
             @Override
@@ -51,6 +54,14 @@ public class AIOFileChannel {
                 System.out.println("failed!");
             }
         });
+        try {
+            current.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("End");
+        fileChannel.close();
         //Once the read operation finishes
         // the CompletionHandler's completed() method will be called.
         // As parameters to the completed() method are passed an Integer
@@ -75,7 +86,7 @@ public class AIOFileChannel {
         ByteBuffer buffer = ByteBuffer.allocate(1024);
         long position = 0;
 
-        buffer.put("test data".getBytes());
+        buffer.put("test data for write".getBytes(),1,10);
         buffer.flip();
 
 /*        Future<Integer> operation = fileChannel.write(buffer, position);
@@ -91,6 +102,7 @@ public class AIOFileChannel {
             @Override
             public void completed(Integer result, ByteBuffer attachment) {
                 System.out.println("bytes written: " + result);
+
             }
 
             @Override
@@ -102,7 +114,10 @@ public class AIOFileChannel {
     }
 
     public static void main(String[] args) throws IOException {
-        readingData();
-        //writingData();
+        //readingData();
+
+        writingData();
     }
+
+
 }

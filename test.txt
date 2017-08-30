@@ -1,0 +1,9 @@
+public interface com.asm3.Comparable extends com.asm3.Mesurable {
+  public static final int LESS;
+
+  public static final int EQUAL;
+
+  public static final int GREATER;
+
+  public abstract int compareTo(java.lang.Object);
+}
