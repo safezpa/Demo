@@ -15,7 +15,8 @@ public class Test {
                 (path);
 
         Person  person=(Person)context.getBean("babyPerson");
-
+        Person bp= (Person) context.getBean("babyPerson");
+        bp.drink("milk");
         person.eatBreakfast();
         System.out.println("===================================================");
         System.out.println();        System.out.println();
