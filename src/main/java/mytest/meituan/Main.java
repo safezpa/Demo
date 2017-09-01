@@ -1,6 +1,11 @@
-package mytest.meitu2;
+package mytest.meituan;
+
+/**
+ * Created by safe on 2017-04-07.
+ */
 
 import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
         Scanner in=new Scanner (System.in);
@@ -52,6 +57,7 @@ public class Main {
         }
         System.out.println(k+"倍数区间个数"+num);
         //记住余数的个数及起始位置
-            System.out.print(longest);
-           }
+        System.out.print(longest);
+    }
 }
+
