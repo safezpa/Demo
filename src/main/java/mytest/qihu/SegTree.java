@@ -5,22 +5,19 @@ public class SegTree {
 
 
     public static void main(String[] args){
-        SegTree lineTree  = new SegTree(2000);
-        int[] arr=new int[2000+1];
-        lineTree.buildMin(1,arr,1,2000);
-        int a=11;
-        lineTree.updateMin(1,1,2000,a,a,1);
-        System.out.println(lineTree.queryMin(1,1,2000,1,2000));
+        int[] arr2={2, 5, 1, 4, 9, 3};
+        System.out.println("================================");
      }
 
-    private static int size;
-    private static SegTreeNode[] segTreeNodes;
+    private  int size;
+    private  SegTreeNode[] segTreeNodes;
     public SegTree(int n) {
-        segTreeNodes = new SegTreeNode[n * 4 + 1]; // 抛弃掉0点 方便index的扩张 e.g 1的子节点为2， 3 2的子节点为3 4
+        size = n*4-1 ;
+        segTreeNodes = new SegTreeNode[size]; // 抛弃掉0点 方便index的扩张 e.g 1的子节点为2， 3 2的子节点为3 4
         for (int i = 0; i <segTreeNodes.length ; i++) {
             segTreeNodes[i]=new SegTreeNode();
         }
-        size = n;
+
     }
 
 
@@ -46,17 +43,20 @@ public class SegTree {
      */
     private void buildMin(int root, int[] arr, int istart, int iend){
         segTreeNodes[root].addMark=0;//设置延迟标记域
-        if (istart==iend)//叶子节点
-            segTreeNodes[root].min=arr[istart];
+        if (istart==iend) {//叶子节点
+            segTreeNodes[root].min = arr[istart];
+        }
         else {
             int mid=(istart+iend)/2;
-            buildMin(root,arr,istart,mid);//递归构造左子树
-            buildMin(root,arr,mid+1,iend);//递归构造右子树
+            buildMin(root*2+1,arr,istart,mid);//递归构造左子树
+            buildMin(root*2+2,arr,mid+1,iend);//递归构造右子树
             //根据左右子树根节点的值，更新当前根节点的值
             segTreeNodes[root].min=Integer.min(segTreeNodes[root*2+1].min,
                     segTreeNodes[root*2+2].min);
         }
     }
+
+
 
     /**
      * 当前节点的标志域向孩子节点传递
@@ -75,6 +75,7 @@ public class SegTree {
             segTreeNodes[root].addMark=0;
         }
     }
+
 
     /**
      *  区间查询min
@@ -175,30 +176,6 @@ public class SegTree {
         int sum;
         int count;
         int addMark;//延迟标记
-    }
-
-    static class SegNode{
-        int min;
-        int max;
-        int sum;
-        int count;
-        int addMark;//延迟标记
-        SegNode lCh;
-        SegNode rCh;
-    }
-
-    private void build2(SegNode root, int[] arr, int istart, int iend){
-        root.addMark=0;//设置延迟标记域
-        if (istart==iend)//叶子节点
-            root.min=arr[istart];
-        else {
-            int mid=(istart+iend)/2;
-            build2(root,arr,istart,mid);//递归构造左子树
-            build2(root,arr,mid+1,iend);//递归构造右子树
-            //根据左右子树根节点的值，更新当前根节点的值
-            root.min=Integer.min(root.lCh.min,
-                    root.rCh.min);
-        }
     }
 }
 
