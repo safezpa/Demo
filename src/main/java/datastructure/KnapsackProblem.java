@@ -32,7 +32,7 @@ package datastructure;
  *
  */
 public class KnapsackProblem {
-     private static int[][] knapsack(int N,int[] weight, int[] value,int C){
+     private static int[][] zeroOnePack(int N,int[] weight, int[] value,int C){
          int[][] f=new int[N+1][C+1];
          for (int i = 1; i <=N ; i++) {
              for (int c = 1; c <=C ; c++) {
@@ -72,7 +72,7 @@ public class KnapsackProblem {
     }
 
     //顺序枚举容量是完全背包问题最简捷的解决方案
-    private static int[] knapsack3(int N,int[] weight, int[] value,int C){
+    private static int[] completePack(int N,int[] weight, int[] value,int C){
         int[] f=new int[C+1];
         for (int i = 1; i <=N ; i++) {
             for (int c = 1; c <=C ; c++) {
@@ -85,12 +85,60 @@ public class KnapsackProblem {
 
         return f;
     }
+
+
+    /**
+     * 二维背包问题 逆序
+     *
+     * @param
+     */
+
+    //
+    private static int[][][] knapsack2ins(int N,int[] weight, int[] value,int[] d2,int L,int C){
+        int[][][] f=new int[N+1][C+1][L+1];
+
+        for (int i = 1; i <=N ; i++) {
+            for (int c = 1; c <=C ; c++) {
+                for (int l = 1; l<=L ; l++) {
+                    f[i][i][c]=f[i-1][c][l];
+                    if (c>weight[i] && l>d2[i])
+                    f[i][c][l]=Integer.max(f[i-1][c][l],f[i-1][c-weight[i]][l-d2[i]]+value[i]);
+                }
+            }
+            System.out.println();
+        }
+
+        return f;
+    }
+
+
+    /**
+     * 二维背包问题 顺序三维数组
+     *
+     * @param
+     */
+
+    //
+    private static int[][] knapsack2dec(int N,int[] weight, int[] value,int[] d2,int L,int C){
+        int[][] f=new int[C+1][L+1];
+
+        for (int i = 1; i <=N ; i++) {
+            for (int c = C; c >=1 ; c--) {
+                for (int l = L; l>d2[i] ; l--) {
+                    f[c][l]=Integer.max(f[c][l],f[c-1][l-d2[i]]+value[i]);
+                }
+            }
+            System.out.println();
+        }
+
+        return f;
+    }
     public static void main(String[] args) {
         int[] weight={0,2,2,6,5,4};
         int[] value={0,6,3,5,4,6};
         int N=5;
         int C=10;
-        int[][] f=knapsack(N,weight,value,C);
+        int[][] f=zeroOnePack(N,weight,value,C);
         for (int i = N; i >=1 ; i--) {
             for (int c = 1; c <=C ; c++) {
                 System.out.print(f[i][c]+"\t");
@@ -98,8 +146,8 @@ public class KnapsackProblem {
             System.out.println();
         }
         System.out.println("=================================");
-        int[] f2=knapsack3(N,weight,value,C);
-        System.out.println("+++++++++++++++++++++++++++++++++");
+        int[] f2=completePack(N,weight,value,C);
+        System.out.println("+++++++++++++完全背包++++++++++++++++++++");
         for (int c = C; c >=0 ; c--) {
             System.out.print(f2[c]+"\t");
         }
@@ -129,3 +177,20 @@ public class KnapsackProblem {
  * 初始化时，除了f[i][0] = 0（第一列）外，其他全为负无穷。
  * 使用一维数组f[v]存储中间状态，v表示背包容量
  */
+
+
+/**
+ * 下面给出O(log amount)时间处理一件多重背包中物品的过程，其中amount表示物品的数量：
+ * procedure MultiplePack(cost,weight,amount)
+ * if cost*amount>=V
+ * CompletePack(cost,weight)
+ * return
+ * integer k=1
+ * while k<amount
+ * ZeroOnePack(k*cost,k*weight)
+ * amount=amount-k
+ * k=k*2
+ * ZeroOnePack(amount*cost,amount*weight)
+ *
+ */
+
