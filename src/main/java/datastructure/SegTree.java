@@ -87,6 +87,7 @@ public class SegTree {
     }
     /**
      *  构造求解区间sum的线段树
+     *
      *  function 构造以v为根的子树
      *  if v所表示的区间内只有一个元素
      *  v区间的最小值就是这个元素, 构造过程结束
@@ -96,6 +97,7 @@ public class SegTree {
      *  分别构造以w和以x为根的子树（递归）
      *  v区间的sum <- sum(w区间的sum,x区间的sum)
      *  end function
+     *
      */
     private void build(SegNode root, int[] arr2, int istart, int iend){
         if (root==null) root=new SegNode(istart,iend);
