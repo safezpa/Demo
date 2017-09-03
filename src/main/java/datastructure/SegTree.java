@@ -19,44 +19,47 @@ public class SegTree {
             end=iend;
         }
     }
-    private static int size;
-    public  SegTree(int n){
-        size=4*n-1;
 
-    }
     public static void main(String[] args){
-        int[] arr0=new int[44];
+        int[] arr0=new int[10];
         int[] arr2={2, 5, 1, 4, 9, 3};
 
         System.out.println("================================");
-        SegTree segTree=new SegTree(44);
-        SegNode root=new SegNode(0,44);
+        SegTree segTree=new SegTree();
+        SegNode root=new SegNode(0,arr0.length-1);
         segTree.build(root,arr0);
         System.out.println("============buildUp=============");
         levelTravel(root);
         for (int i = 0; i <arr2.length ; i++) {
             segTree.update(root,arr2[i],arr2[i], 1);
+            System.out.println("===========afterUpdate"+arr2[i]+"大=======");
             levelTravel(root);
             System.out.println("=============Query==比"+arr2[i]+"大的================");
             System.out.println(segTree.query(root,arr2[i]+1,44));
         }
 
-/*        segTree.update(root,0,5, 1);
+/*        System.out.println("================================");
+        SegTree segTree2=new SegTree();
+        SegNode root2=new SegNode(0,arr2.length-1);
+        segTree2.build(root2,arr0);
+        System.out.println("============buildUp=============");
+        levelTravel(root2);
+        segTree2.update(root,0,5, 1);
         System.out.println("===========afterUpdate=============");
-        levelTravel(root);
+        levelTravel(root2);
         System.out.println("=============Query==0-5================");
-        System.out.println(segTree.query(root,0,5));
+        System.out.println(segTree2.query(root2,0,5));
         System.out.println("=============afterQuery===========");
-        levelTravel(root);
+        levelTravel(root2);
         System.out.println("=============Query==3-5================");
-        System.out.println(segTree.query(root,3,5));
+        System.out.println(segTree2.query(root2,3,5));
         System.out.println("=============afterQuery===========");
-        levelTravel(root);
+        levelTravel(root2);
         System.out.println("=============Query==3-4================");
-        System.out.println(segTree.query(root,3,4));
+        System.out.println(segTree2.query(root2,3,4));
         System.out.println("=============afterQuery===========");
-        levelTravel(root);
-        System.out.println(segTree.query(root,4,4));*/
+        levelTravel(root2);
+        System.out.println(segTree2.query(root2,4,4));*/
     }
 
 
@@ -94,23 +97,23 @@ public class SegTree {
      *  v区间的sum <- sum(w区间的sum,x区间的sum)
      *  end function
      */
-    private void build(SegNode root,  int istart, int iend){
+    private void build(SegNode root, int[] arr2, int istart, int iend){
         if (root==null) root=new SegNode(istart,iend);
         root.addMark=0;//设置延迟标记域
         if (istart==iend)//叶子节点
-            root.sum=root.max=root.min=0;//arr[istart];
+            root.sum=root.max=root.min=arr2[istart];
         else {
             int mid=(istart+iend)/2;
             if (root.lCh==null) root.lCh=new SegNode(istart,mid);
-            build(root.lCh,istart,mid);//递归构造左子树
+            build(root.lCh,arr2,istart,mid);//递归构造左子树
             if (root.rCh==null) root.rCh=new SegNode(mid+1,iend);
-            build(root.rCh,mid+1,iend);//递归构造右子树
+            build(root.rCh,arr2,mid+1,iend);//递归构造右子树
             //根据左右子树根节点的值，更新当前根节点的值
             pushUp(root);
         }
     }
     private void build(SegNode root, int[] arr2) {
-        build(root,0,44);//arr2.length-1);
+        build(root,arr2,0,arr2.length-1);
     }
     /**
      * 区间更新
@@ -123,7 +126,7 @@ public class SegTree {
      *         }
      *         Push_Down(p); // 把当前结点的标记向下传递
      *         int mid = (p->Left + p->Right) // 计算左右子结点的分隔点
-     *         if (a < mid) update(p->Lch, a, b); // 和左孩子有交集，考察左子结点
+     *         if (a <= mid) update(p->Lch, a, b); // 和左孩子有交集，考察左子结点
      *         if (b > mid) update(p->Rch, a, b); // 和右孩子有交集，考察右子结点
      *         Update(p); // 维护当前结点的信息（因为其子结点的信息可能有更改）
      * }
@@ -141,7 +144,7 @@ public class SegTree {
         pushDown(p);
         //更新左右孩子节点
         int mid=(p.start+p.end)/2;
-        if (a<mid && p.lCh!=null)
+        if (a<=mid && p.lCh!=null)
         update(p.lCh,a,b,addVal);
         if (b>mid && p.rCh!=null)
         update(p.rCh,a,b,addVal);

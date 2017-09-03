@@ -64,5 +64,106 @@ public class Ann {
             }
         }
     }
+
+    public char[][] Calculate0(char[] items){
+        int length = items.length;
+        /**
+         * length!阶乘个 factorial(length)]
+         * result = new char[factorial(length)][]
+         */
+        char[][] result = new char[(length)][];//factorial(length)]
+
+        int iteration = length - 1;
+        int index = 0;
+        //first item is inserted here
+        result[index++] = items;
+        while (iteration > 0){
+            //we keep count of current result
+            int resultCount = index;
+            for (int i = 0; i < resultCount; i++)
+            {
+                int rotateLength = length - iteration;
+                char[] curItem = result[i];
+                if (rotateLength > 0)
+                {
+                    while (rotateLength > 0)
+                    {
+                        rotateRight0(curItem, iteration - 1);
+                        //the rotated item now is new item we copy it into new item
+                        char[] newItem = new char[length];
+                       // curItem.CopyTo(newItem, 0);
+                        result[index++] = newItem;
+                        rotateLength--;
+                    }
+                    //This rotation causes that original item doesn't change
+                    rotateRight0(curItem, iteration - 1);
+                }
+            }
+
+            iteration--;
+        }
+
+        return result;
+    }
+    public void rotateRight0(char[] items, int startIndex)
+    {
+        int last = items.length - 1;
+        char temp = items[last];
+        int len = items.length;
+        System.arraycopy(items, startIndex, items, startIndex + 1, len - (startIndex + 1));
+        items[startIndex] = temp;
+    }
+
+
+
+
+
+    public char[] calculate1(char[] items)
+    {
+        int length = items.length;
+        char[] result = new char[(length) * length];
+
+        int iteration = length - 1;
+        int index = 1;
+        //first item is inserted here
+        System.arraycopy(items,0, result,0, length);
+        while (iteration > 0)
+        {
+            //we keep count of current result
+            int resultCount = index;
+            for (int i = 0; i < resultCount; i++)
+            {
+                int rotateLength = length - iteration;
+                if (rotateLength > 0)
+                {
+                    int startIndex = i * length + (iteration - 1);
+                    int lastIndex = (i + 1) * length - 1;
+                    while (rotateLength > 0)
+                    {
+                        rotateRight(result, startIndex, lastIndex);
+                        //the rotated item  is new item and we copy it into new item
+                        System.arraycopy(result, i * length, result, index * length, length);
+                        index++;
+                        rotateLength--;
+                    }
+                    //This rotation causes that original item doesn't change
+                    rotateRight(result, startIndex, lastIndex);
+                }
+            }
+
+            iteration--;
+        }
+
+        return result;
+    }
+    public void rotateRight(char[] items, int startIndex, int lastIndex)
+    {
+        char temp = items[lastIndex];
+        int len = lastIndex + 1;
+        System.arraycopy(items, startIndex, items, startIndex + 1, len - (startIndex + 1));
+        items[startIndex] = temp;
+
+    }
+
 }
 

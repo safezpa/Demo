@@ -26,8 +26,10 @@ public class HashCodeTest {
         System.out.println("hashCode2: " + s1.hashCode() + " " + sb1.hashCode());
 
         // are they equals?
-        System.out.println("s  s1 : " + s.equals(s1));
-        System.out.println("sb sb1: " + sb.equals(sb1));
+        System.out.println("s == s1 : " + (s==s1));
+        System.out.println("s equals s1 : " + s.equals(s1));
+        System.out.println("sb == sb1: " + (sb==sb1));
+        System.out.println("sb equals sb1: " + sb.equals(sb1));
     }
 }
 

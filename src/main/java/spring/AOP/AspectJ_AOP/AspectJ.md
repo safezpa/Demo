@@ -18,7 +18,7 @@ AspectJ 支持的注释类型如下：
 创建 Aspect 类
 
 LoggingAspect.java如下：
-
+````
 package com.shiyanlou.spring.aop.aspectj;
 
 import org.aspectj.lang.JoinPoint;
@@ -43,7 +43,7 @@ public class LoggingAspect {
         System.out.println("**********");
     }
 }
-
+````
 解释：
 
     必须使用 @Aspect 在 LoggingAspect 声明之前注释，以便被框架扫描到；

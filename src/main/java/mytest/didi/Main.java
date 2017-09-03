@@ -27,6 +27,16 @@ public class Main {
     }
 
     static Stack<Point> s=new Stack<>();
+
+    /**
+     *
+     * @param imageData 图像点对象数组
+     * @param i 当前点x
+     * @param j 当前点y
+     * @param row 图像高
+     * @param col 图像宽
+     * @param k 图像分割数
+     */
     static void fourNeighborhoodLabels(Point[][] imageData,int i,int j,int row,int col,int k){
         if (imageData[i][j].value==1){
             imageData[i][j].value=k;
@@ -93,6 +103,7 @@ public class Main {
         for (int i = 0; i <row ; i++) {
             for (int j = 0; j <col ; j++) {
                 if (p[i][j].value==1) k++;
+                //广度优先搜索
                 fourNeighborhoodLabels(p,i,j,row,col,k);
                 while (!s.isEmpty()){
                     temp=s.pop();
@@ -104,7 +115,7 @@ public class Main {
         }
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            Date date = sdf.parse("2011-12-12");
+            Date date = sdf.parse("2017-09-03");
             System.out.println(date);
         } catch (ParseException e) {
             e.printStackTrace();
