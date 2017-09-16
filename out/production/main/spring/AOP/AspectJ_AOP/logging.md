@@ -1,3 +1,4 @@
+````
 package cn.iouoi.aop.logging;
 
 import io.github.jhipster.config.JHipsterConstants;
@@ -84,3 +85,4 @@ public class LoggingAspect {
         }
     }
 }
+````

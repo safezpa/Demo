@@ -8,6 +8,9 @@ public class SegTree {
         int sum;
         int max;
         int min;
+        int xor;
+        int xorSum0;
+        int xorSum1;
         int addMark;//延迟标记
         int start;
         int end;
@@ -69,6 +72,9 @@ public class SegTree {
         p.sum = p.lCh.sum+p.rCh.sum;
         p.max = Integer.max(p.lCh.max,p.rCh.max);
         p.min = Integer.min(p.lCh.min,p.lCh.min);
+        p.xor = p.lCh.xor ^ p.rCh.xor;
+        p.xorSum1 = p.lCh.xorSum1+p.rCh.xorSum1;
+        p.xorSum0 = p.lCh.xorSum0+p.rCh.xorSum0;
     }
     private static void pushDown(SegNode p) {
         if (p.rCh==null || p.lCh==null) return;
@@ -102,8 +108,12 @@ public class SegTree {
     private void build(SegNode root, int[] arr2, int istart, int iend){
         if (root==null) root=new SegNode(istart,iend);
         root.addMark=0;//设置延迟标记域
-        if (istart==iend)//叶子节点
-            root.sum=root.max=root.min=arr2[istart];
+        if (istart==iend) {//叶子节点
+            root.sum = root.max = root.min = arr2[istart];
+            root.xor = arr2[istart];
+            if (root.xor==0) root.xorSum0=1;
+            if (root.xor==1) root.xorSum1=1;
+        }
         else {
             int mid=(istart+iend)/2;
             if (root.lCh==null) root.lCh=new SegNode(istart,mid);

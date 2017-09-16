@@ -29,7 +29,7 @@ public class ReadCompletionHandler implements CompletionHandler<Integer, ByteBuf
             //如果是"QUERY TIME ORDER"则获取当前系统服务器的时间，
             String req = new String(body, "UTF-8");
             System.out.println("The time server receive order : " + req);
-            String currentTime = "QUERY TIME ORDER".equalsIgnoreCase(req) ? new java.util.Date(
+            String currentTime = "QUERY TIME ORDER NOW".equalsIgnoreCase(req) ? new java.util.Date(
                     System.currentTimeMillis()).toString() : "BAD ORDER";
             //调用doWrite方法发送给客户端。
             doWrite(currentTime);

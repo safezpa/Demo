@@ -8,7 +8,9 @@ package cs_network;/* UDPServer.java from Kurose-Ross
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
-class UDPServer 
+import java.util.Scanner;
+
+class UDPServer
 {
   public static void main(String args[]) throws Exception
   {
@@ -27,12 +29,12 @@ class UDPServer
       receivePacket.getData());       updated Amer 10/2002 */
       String sentence = new String(
 				    receivePacket.getData(), 0, receivePacket.getLength());
-
+          System.out.println("from client:"+sentence);
       InetAddress IPAddress =
 	   receivePacket.getAddress();
       int port = receivePacket.getPort();
-      String capitalizedSentence = 
-	   sentence.toUpperCase();
+      String capitalizedSentence = new Scanner(System.in).nextLine();
+
       sendData = capitalizedSentence.getBytes();
       DatagramPacket sendPacket =
 	   new DatagramPacket(sendData, sendData.length, 
