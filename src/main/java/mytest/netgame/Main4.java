@@ -20,7 +20,22 @@ import java.text.SimpleDateFormat;
  */
 public class Main4 {
     public static void main(String[] args) throws ParseException {
-        long epoch = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse("01/01/1970 01:00:00").getTime();
+        long epoch0 = new SimpleDateFormat("mm-dd-yyyy HH:mm:ss").parse("01-01-1970 00:00:00")
+                .getTime();
+        long epoch = new SimpleDateFormat("mm-dd-yyyy HH:mm:ss").parse("02-19-2016 00:00:00")
+                .getTime();
+        long epoch1 = new SimpleDateFormat("mm-dd-yyyy HH:mm:ss").parse("04-16-2016 00:00:00")
+                .getTime();
+        long epoch2 = new SimpleDateFormat("mm-dd-yyyy HH:mm:ss").parse("11-11-2016 11:11:11")
+                .getTime();
+        long epoch3= new SimpleDateFormat("mm-dd-yyyy HH:mm:ss").parse("11-12-2016 11:11:11")
+                .getTime();
+
         System.out.println(epoch);
+        System.out.println(epoch1);
+        System.out.println(epoch2);
+        System.out.println(epoch3);
+        System.out.println();
     }
+
 }
